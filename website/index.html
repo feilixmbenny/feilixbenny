@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feilix Benny — Shorts & Reels Editor</title>
+
+<!--
+  ============================================================
+  HOW TO CUSTOMIZE THIS FILE (read me first!)
+  ============================================================
+  Search for these placeholders and replace them with your info:
+
+  Feilix Benny        -> your name / brand name
+  [YOUR TAGLINE]      -> one line about what you do
+  [YOUR BIO]           -> 2-3 sentence bio
+  [CLIP 1 LINK] .. [CLIP 6 LINK]  -> your Drive/Vimeo links
+  [CLIP 1 TITLE] etc.  -> short titles for each clip
+  [EMAIL]              -> your email address
+  [WHATSAPP LINK]      -> https://wa.me/91XXXXXXXXXX
+
+  HOW TO PUBLISH FOR FREE:
+  1. Create a free GitHub account (github.com)
+  2. Create a new repository named exactly: yourusername.github.io
+  3. Upload this file and rename it to: index.html
+  4. Go to Settings > Pages, it will auto-publish
+  5. Your site goes live at: https://yourusername.github.io
+
+  (Alternative: drag-and-drop this file's folder into netlify.com/drop
+  for an instant free link, no account needed.)
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #000000;
+    --bg-raised: #17181B;
+    --text: #ffffffe3;
+    --text-dim: #8A8D96;
+    --accent: #e80808;
+    --accent-2: #FFC857;
+    --line: #2A2C31;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Work Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .display {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.92;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* ===== Tick strip — signature motif, used as section dividers ===== */
+  .tick-strip {
+    height: 28px;
+    width: 100%;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--line) 0px, var(--line) 1px,
+      transparent 1px, transparent 24px
+    );
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 100% 14px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .tick-strip::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 24px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--accent-2) 0px, var(--accent-2) 1px,
+      transparent 1px, transparent 96px
+    );
+    opacity: 0.5;
+  }
+
+  /* ===== Header ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px clamp(20px, 5vw, 64px);
+    background: rgba(14,15,17,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  header .brand {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  header nav { display: flex; gap: 28px; }
+  header nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    transition: color 0.2s;
+  }
+  header nav a:hover { color: var(--accent); }
+
+  /* ===== Hero ===== */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px clamp(20px, 5vw, 64px) 60px;
+    position: relative;
+  }
+  .hero .timecode {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent-2);
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero .timecode::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+  .hero h1 {
+    font-size: clamp(48px, 10vw, 128px);
+    max-width: 1100px;
+  }
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero .sub {
+    margin-top: 28px;
+    max-width: 560px;
+    color: var(--text-dim);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .hero .cta-row {
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 16px 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.15s ease, background 0.2s;
+  }
+  .btn-fill { background: var(--accent); color: var(--bg); font-weight: 600; }
+  .btn-fill:hover { transform: translateY(-2px); background: #ff002f; }
+  .btn-ghost { border: 1px solid var(--line); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); }
+
+  /* ===== Section label ===== */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-2);
+    padding: 48px clamp(20px, 5vw, 64px) 8px;
+  }
+  .section-title {
+    font-size: clamp(30px, 5vw, 52px);
+    padding: 0 clamp(20px, 5vw, 64px) 40px;
+    max-width: 900px;
+  }
+
+  /* ===== Work / filmstrip ===== */
+  .filmstrip {
+    display: flex;
+    gap: 20px;
+    padding: 0 clamp(20px, 5vw, 64px) 80px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .filmstrip::-webkit-scrollbar { height: 6px; }
+  .filmstrip::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+  .clip-card {
+    flex: 0 0 auto;
+    width: 220px;
+    scroll-snap-align: start;
+  }
+  .clip-thumb {
+    width: 220px;
+    aspect-ratio: 9 / 16;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .clip-card a:hover .clip-thumb {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }.clip-thumb img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  .clip-thumb .play {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--text-dim);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim);
+  }
+  .clip-card a:hover .play { border-color: var(--accent); color: var(--accent); }
+  .clip-thumb .dur {
+    position: absolute;
+    bottom: 10px; right: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: rgba(0,0,0,0.6);
+    padding: 3px 7px;
+    border-radius: 3px;
+    color: var(--text-dim);
+  }
+  .clip-meta {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .clip-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* ===== About / tracks ===== */
+  .about {
+    padding: 0 clamp(20px, 5vw, 64px) 90px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+  }
+  .about p {
+    color: var(--text-dim);
+    font-size: 17px;
+    line-height: 1.75;
+    max-width: 480px;
+  }
+  .tracks { display: flex; flex-direction: column; gap: 14px; }
+  .track {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 18px;
+    background: var(--bg-raised);
+  }
+  .track .id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-2);
+    border-right: 1px solid var(--line);
+    padding-right: 12px;
+  }
+  .track .label { font-size: 14px; color: var(--text); }
+  .track .label span { color: var(--text-dim); font-size: 12px; display: block; margin-top: 2px; }
+
+  /* ===== Contact ===== */
+  .contact {
+    padding: 90px clamp(20px, 5vw, 64px) 60px;
+    text-align: left;
+  }
+  .contact h2 {
+    font-size: clamp(36px, 7vw, 80px);
+    max-width: 800px;
+  }
+  .contact .sub {
+    color: var(--text-dim);
+    margin-top: 20px;
+    font-size: 16px;
+    max-width: 480px;
+  }
+  .contact .cta-row { margin-top: 40px; }
+
+  footer {
+    padding: 30px clamp(20px, 5vw, 64px) 40px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (max-width: 760px) {
+    header nav { gap: 16px; }
+    header nav a { font-size: 10px; }
+    .about { grid-template-columns: 1fr; }
+    .clip-card, .clip-thumb { width: 160px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero .timecode::before { animation: none; }
+    * { transition: none !important; }
+  }
+
+  a:focus-visible, .btn:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Feilix Benny</div>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="timecode mono">REC 01:20:04:08 — SHORTS & REELS EDITOR</div>
+  <h1 class="display">
+    I CUT CLIPS<br>
+    THAT STOP <span class="accent">THE SCROLL.</span>
+  </h1>
+  <p class="sub">"Fast edits. Multiple projects. Zero delays."</p>
+  <div class="cta-row">
+    <a class="btn btn-fill" href="#work">View Work ↓</a>
+    <a class="btn btn-ghost" href="#contact">Hire Me</a>
+  </div>
+</section>
+
+<div class="tick-strip"></div>
+
+<section id="work">
+  <div class="section-label mono">// 01 — CURATED CLIPS</div>
+  <h2 class="section-title display">RECENT EDITS</h2>
+
+  <div class="filmstrip">
+
+    <div class="clip-card">
+      <a href="https://drive.google.com/file/d/15kQBLUsCHtM_4_X6cH85GDHCZxQkVkSh/view?usp=drive_link" target="_blank" rel="noopener">
+        <div class="clip-thumb">
+  <img src="images/Artboard 1.jpg" alt="[CLIP 1 TITLE]">
+  <div class="play">▶</div>
+  <div class="dur mono">00:15</div>
+</div>
+      </a>
+      <div class="clip-meta">Indian Super League</div>
+      <div class="clip-tag mono">Matchday Reel</div>
+    </div>
+
+    <div class="clip-card">
+      <a href="https://drive.google.com/file/d/1Kpq-pjnEonVBfjIJBaeZznK-pmyMHHsU/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="clip-thumb">
+  <img src="images/Artboard 2.jpg" alt="[CLIP 1 TITLE]">
+  <div class="play">▶</div>
+  <div class="dur mono">01:05</div>
+</div>
+      </a>
+      <div class="clip-meta">Furlenco X Srikanth K</div>
+      <div class="clip-tag mono">Brand Reel Shoot & Edit </div>
+    </div>
+
+    <div class="clip-card">
+      <a href="https://drive.google.com/file/d/1IPHrHROziFvKAncPxEMYe_j0DGLItp0Z/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="clip-thumb">
+          <img src="images/Artboard 3.jpg" alt="[CLIP 1 TITLE]">
+          <div class="play">▶</div>
+          <div class="dur mono">01:02</div>
+        </div>
+      </a>
+      <div class="clip-meta">Airtel X Sunil Chhetri</div>
+      <div class="clip-tag mono">Brand Reel</div>
+    </div>
+
+    <div class="clip-card">
+      <a href="https://drive.google.com/file/d/1jQvLZ3EGYBbfyHmbE3apBmZZygroZYoC/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="clip-thumb">
+          <img src="images/Artboard 4.jpg" alt="[CLIP 1 TITLE]">
+          <div class="play">▶</div>
+          <div class="dur mono">00:35</div>
+        </div>
+      </a>
+      <div class="clip-meta">Unrack</div>
+      <div class="clip-tag mono">Brand Reel Shoot & edit </div>
+    </div>
+
+    <div class="clip-card">
+      <a href="https://drive.google.com/file/d/1v1-0ZWw4NeyjhViUb0mMOVji4Rtqqzj1/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="clip-thumb">
+          <img src="images/Artboard 5.jpg" alt="[CLIP 1 TITLE]">
+          <div class="play">▶</div>
+          <div class="dur mono">01:28</div>
+        </div>
+      </a>
+      <div class="clip-meta">Mysore Warriors</div>
+      <div class="clip-tag mono">Short</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="tick-strip"></div>
+
+<section id="about" class="about" style="padding-top:60px;">
+  <div>
+    <div class="section-label mono" style="padding-left:0;">// 02 — ABOUT</div>
+    <h2 class="section-title display" style="padding-left:0; max-width:420px;">HOW I WORK</h2>
+    <p>I'm a video editor based in India, working with creators and brands worldwide. I specialize in short-form content  Fast-paced edits, Motion captions, and Sound design built for retention on Reels, Shorts, and TikTok. Comfortable working across time zones with quick turnaround.</p>
+  </div>
+  <div class="tracks">
+    <div class="track">
+      <div class="id mono">V2</div>
+      <div class="label">Motion captions & text animation<span>Auto-sync, stylized, on-brand</span></div>
+    </div>
+    <div class="track">
+      <div class="id mono">V1</div>
+      <div class="label">Cutting & pacing<span>Hook-first structure, jump cuts, retention edits</span></div>
+    </div>
+    <div class="track">
+      <div class="id mono">A1</div>
+      <div class="label">Sound design<span>SFX, music sync, voiceover cleanup</span></div>
+    </div>
+    <div class="track">
+      <div class="id mono">FX</div>
+      <div class="label">Color & grade<span>Consistent look across platforms</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="tick-strip"></div>
+
+<section id="contact" class="contact">
+  <div class="section-label mono" style="padding-left:0;">// 03 — CONTACT</div>
+  <h2 class="display">LET'S Create<br>SOMETHING thats Great.</h2> 
+  <p class="sub">Open to freelance projects — long-form to Shorts, one-offs to ongoing. Usually reply within a day.</p>
+  <div class="cta-row">
+    <a class="btn btn-fill" href="mailto:23bcar0076@jainuniversity.ac.in">Email Me ↗</a>
+    <a class="btn btn-ghost" href="https://wa.me/919019777277" target="_blank" rel="noopener">WhatsApp ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span>© <span id="year"></span> Feilix Benny</span>
+  <span>BASED IN INDIA · WORKING WORLDWIDE</span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
