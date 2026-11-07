@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Feilix Benny — Event Film Rate Card</title>
+<meta name="description" content="Freelance event film editing rates: teasers, highlight films, full event films and packages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Layout: the portfolio's edit-timeline look. Rates read as tracks on a timeline, durations shown as timecode. Single dark look, matching feilixmbenny.github.io */
+  :root {
+    --bg: #000000;
+    --bg-raised: #17181B;
+    --text: #ffffffe3;
+    --text-dim: #8A8D96;
+    --accent: #e80808;
+    --accent-2: #FFC857;
+    --line: #2A2C31;
+    --f-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+    --f-body: 'Work Sans', system-ui, -apple-system, sans-serif;
+    --f-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    --gutter-x: clamp(16px, 5vw, 64px);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--bg); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--f-body);
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  .wrap {
+    padding-left: max(var(--gutter-x), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--gutter-x), env(safe-area-inset-right, 0px));
+  }
+
+  .display {
+    font-family: var(--f-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.92;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .mono { font-family: var(--f-mono); }
+
+  /* Tick strip: signature divider from the portfolio */
+  .tick-strip {
+    height: 28px;
+    width: 100%;
+    background-image: repeating-linear-gradient(90deg, var(--line) 0px, var(--line) 1px, transparent 1px, transparent 24px);
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 100% 14px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .tick-strip::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 24px;
+    background-image: repeating-linear-gradient(90deg, var(--accent-2) 0px, var(--accent-2) 1px, transparent 1px, transparent 96px);
+    opacity: 0.5;
+  }
+
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  header .brand {
+    font-family: var(--f-display);
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  header nav { display: flex; gap: 24px; flex-wrap: wrap; }
+  header nav a {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    transition: color 0.2s;
+  }
+  header nav a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero { padding-block: 80px 64px; }
+  .timecode {
+    font-size: 13px;
+    color: var(--accent-2);
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .timecode::before {
+    content: '';
+    flex: 0 0 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+  .hero h1 { font-size: clamp(48px, 10vw, 128px); max-width: 1100px; }
+  .hero h1 .accent { color: var(--accent); }
+  .hero .sub {
+    margin: 28px 0 0;
+    max-width: 580px;
+    color: var(--text-dim);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .cta-row { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 16px 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .btn-fill { background: var(--accent); color: var(--bg); font-weight: 600; }
+  .btn-fill:hover { transform: translateY(-2px); background: #ff002f; }
+  .btn-ghost { border-color: var(--line); color: var(--text); background: transparent; }
+  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); }
+
+  /* Section heads */
+  section { padding-block: 56px 72px; }
+  .section-label {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-2);
+    margin-bottom: 10px;
+  }
+  .section-title { font-size: clamp(30px, 5vw, 52px); max-width: 900px; margin-bottom: 36px; }
+
+  /* Rate tracks */
+  .rates { display: flex; flex-direction: column; gap: 14px; }
+  .rate {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    transition: border-color 0.2s;
+  }
+  .rate:hover { border-color: var(--accent); }
+  .rate .id {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    border-right: 1px solid var(--line);
+    padding-block: 6px;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+  .rate .name { font-size: 18px; font-weight: 600; }
+  .rate .tc {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+  }
+  .rate .desc { color: var(--text-dim); font-size: 14px; line-height: 1.55; margin-top: 8px; max-width: 60ch; }
+  .rate .bar {
+    margin-top: 12px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--line);
+    max-width: 420px;
+    overflow: hidden;
+  }
+  .rate .bar span { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+  .price { text-align: right; }
+  .price .from {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+  .price .amt {
+    font-family: var(--f-display);
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1;
+    margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .rate.featured { border-color: var(--accent); }
+  .rate.featured .price .amt { color: var(--accent); }
+  .tag {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bg);
+    background: var(--accent-2);
+    padding: 3px 7px;
+    border-radius: 3px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .scale-note { margin-top: 16px; font-size: 12px; color: var(--text-dim); }
+
+  /* Included + add-ons */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .split > div { min-width: 0; }
+  .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .list li .k { min-width: 0; }
+  .list li .k small { display: block; color: var(--text-dim); font-size: 13px; margin-top: 3px; }
+  .list li .v {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--accent-2);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .list.check li .v { color: var(--accent); }
+
+  /* Workflow timeline */
+  .flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .step {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+    background: var(--bg-raised);
+  }
+  .step .n { font-family: var(--f-mono); font-size: 12px; color: var(--accent-2); }
+  .step h3 { font-size: 16px; margin: 10px 0 6px; font-weight: 600; }
+  .step p { margin: 0; color: var(--text-dim); font-size: 14px; line-height: 1.55; }
+
+  .terms { margin-top: 28px; color: var(--text-dim); font-size: 14px; line-height: 1.7; max-width: 70ch; }
+
+  /* Contact */
+  .contact h2 { font-size: clamp(36px, 7vw, 80px); max-width: 860px; }
+  .contact .sub { color: var(--text-dim); margin: 20px 0 0; font-size: 16px; max-width: 520px; line-height: 1.6; }
+  .contact-lines { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
+  .contact-line {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-family: var(--f-mono);
+    font-size: 14px;
+  }
+  .contact-line .lbl { color: var(--text-dim); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; width: 90px; }
+  .contact-line .val { user-select: all; word-break: break-all; }
+  .copy {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+  .copy:hover { color: var(--accent-2); border-color: var(--accent-2); }
+
+  footer {
+    padding-block: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-dim);
+    font-family: var(--f-mono);
+    font-size: 12px;
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; gap: 48px; }
+    .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .rate { grid-template-columns: 40px minmax(0, 1fr); padding: 18px; gap: 14px; }
+    .rate .price { grid-column: 2; text-align: left; }
+    .flow { grid-template-columns: 1fr; }
+    .hero { padding-block: 56px 48px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .timecode::before { animation: none; }
+    * { transition: none !important; }
+  }
+  a:focus-visible, .btn:focus-visible, .copy:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <a class="brand" href="./">Feilix Benny</a>
+  <nav>
+    <a href="./">← Portfolio</a>
+    <a href="#rates">Rates</a>
+    <a href="#addons">Add-ons</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero wrap">
+  <div class="timecode mono">REC 00:00:00:00 · EVENT FILM EDITING · FREELANCE RATES</div>
+  <h1 class="display">EVENT FILMS,<br>CUT TO <span class="accent">FEEL IT.</span></h1>
+  <p class="sub">Freelance editing for production houses. You shoot the event, I turn the footage into teasers, highlights and full films that match your studio's style and deadlines.</p>
+  <div class="cta-row">
+    <a class="btn btn-fill" href="#rates">See Rates ↓</a>
+    <a class="btn btn-ghost" href="./">← View Portfolio</a>
+  </div>
+</section>
+
+<div class="tick-strip"></div>
+
+<section id="rates" class="wrap">
+  <div class="section-label">// 01 · Rate card</div>
+  <h2 class="section-title display">Per-film rates</h2>
+
+  <div class="rates">
+    <div class="rate">
+      <div class="id">V1</div>
+      <div>
+        <div class="name">Teaser / Instagram reel</div>
+        <div class="tc">00:00:30 → 00:01:30 · 9:16 or 16:9</div>
+        <div class="desc">A quick, music-led cut for socials. Usually the first thing the client sees after the event.</div>
+        <div class="bar" aria-hidden="true"><span style="width:4%"></span></div>
+      </div>
+      <div class="price"><div class="from">Starting at</div><div class="amt">₹4,000</div></div>
+    </div>
+
+    <div class="rate">
+      <div class="id">V2</div>
+      <div>
+        <div class="name">Corporate / brand event recap</div>
+        <div class="tc">00:02:00 → 00:04:00</div>
+        <div class="desc">Conferences, launches and brand activations. Clean pacing, speaker soundbites and lower thirds.</div>
+        <div class="bar" aria-hidden="true"><span style="width:9%"></span></div>
+      </div>
+      <div class="price"><div class="from">Starting at</div><div class="amt">₹9,000</div></div>
+    </div>
+
+    <div class="rate">
+      <div class="id">V3</div>
+      <div>
+        <div class="name">Highlight film</div>
+        <div class="tc">00:03:00 → 00:06:00</div>
+        <div class="desc">The story of the day in a few minutes. Built around emotion, vows or speeches, and the best moments.</div>
+        <div class="bar" aria-hidden="true"><span style="width:13%"></span></div>
+      </div>
+      <div class="price"><div class="from">Starting at</div><div class="amt">₹12,000</div></div>
+    </div>
+
+    <div class="rate">
+      <div class="id">V4</div>
+      <div>
+        <div class="name">Full event film</div>
+        <div class="tc">00:15:00 → 00:45:00</div>
+        <div class="desc">Documentary-style edit covering the full event, with ceremonies, speeches and performances in order.</div>
+        <div class="bar" aria-hidden="true"><span style="width:100%"></span></div>
+      </div>
+      <div class="price"><div class="from">Starting at</div><div class="amt">₹18,000</div></div>
+    </div>
+
+    <div class="rate featured">
+      <div class="id">PKG</div>
+      <div>
+        <div class="name">Full event package <span class="tag">Best value</span></div>
+        <div class="tc">V1 + V3 + V4</div>
+        <div class="desc">Teaser, highlight film and full film from one event. Saves ₹4,000 compared with booking each separately.</div>
+      </div>
+      <div class="price"><div class="from">Starting at</div><div class="amt">₹30,000</div></div>
+    </div>
+  </div>
+  <p class="scale-note mono">Bars show the longest runtime of each film to scale (45 min = full bar). Final quote depends on footage volume and number of cameras.</p>
+</section>
+
+<div class="tick-strip"></div>
+
+<section id="addons" class="wrap">
+  <div class="split">
+    <div>
+      <div class="section-label">// 02 · Included</div>
+      <h2 class="section-title display">In every edit</h2>
+      <ul class="list check">
+        <li><span class="k">Color correction &amp; grade<small>Matched to your studio's LUTs or look</small></span><span class="v">✓</span></li>
+        <li><span class="k">Sound mix &amp; music sync<small>SFX, dialogue cleanup, beat-matched cuts</small></span><span class="v">✓</span></li>
+        <li><span class="k">2 revision rounds<small>Consolidated feedback per round</small></span><span class="v">✓</span></li>
+        <li><span class="k">Titles &amp; lower thirds<small>Names, venues, dates</small></span><span class="v">✓</span></li>
+        <li><span class="k">4K / 1080p export<small>Delivery-ready masters</small></span><span class="v">✓</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="section-label">// 03 · Add-ons</div>
+      <h2 class="section-title display">Extras</h2>
+      <ul class="list">
+        <li><span class="k">Rush delivery<small>First cut in under 5 days</small></span><span class="v">+25%</span></li>
+        <li><span class="k">Multi-day event<small>Per extra day of footage</small></span><span class="v">+₹3,000</span></li>
+        <li><span class="k">Heavy multi-cam<small>Over 500 GB or 4+ cameras</small></span><span class="v">+₹2,500</span></li>
+        <li><span class="k">Extra reel from same event<small>Different cut or aspect ratio</small></span><span class="v">₹3,000</span></li>
+        <li><span class="k">Extra revision round<small>After the included two</small></span><span class="v">₹1,500</span></li>
+        <li><span class="k">Subtitles<small>English captions burned in or SRT</small></span><span class="v">₹1,000</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="tick-strip"></div>
+
+<section id="process" class="wrap">
+  <div class="section-label">// 04 · Process</div>
+  <h2 class="section-title display">Footage to final</h2>
+  <div class="flow">
+    <div class="step">
+      <div class="n">STEP 1</div>
+      <h3>Brief &amp; footage</h3>
+      <p>You share the brief, reference films and footage through Drive, WeTransfer or a hard drive.</p>
+    </div>
+    <div class="step">
+      <div class="n">STEP 2</div>
+      <h3>First cut</h3>
+      <p>Reels in 2–3 days. Highlights in 5–7 days. Full films in 7–10 days.</p>
+    </div>
+    <div class="step">
+      <div class="n">STEP 3</div>
+      <h3>Revisions</h3>
+      <p>Two rounds of changes, turned around in 1–2 days each.</p>
+    </div>
+    <div class="step">
+      <div class="n">STEP 4</div>
+      <h3>Final delivery</h3>
+      <p>Graded, mixed masters exported in the formats you need.</p>
+    </div>
+  </div>
+  <p class="terms">Payment: 50% when the first cut is delivered, 50% on final delivery. Turnaround times start once all footage and the brief are received. Music licensing is handled by the studio unless agreed otherwise.</p>
+</section>
+
+<div class="tick-strip"></div>
+
+<section id="contact" class="contact wrap">
+  <div class="section-label">// 05 · Contact</div>
+  <h2 class="display">Got an event<br>to cut?</h2>
+  <p class="sub">Send over the brief and a rough idea of the footage, and I'll confirm the quote and timeline within a day.</p>
+  <div class="contact-lines">
+    <div class="contact-line">
+      <span class="lbl">Email</span>
+      <span class="val" id="email">bennyfeilix82@gmail.com</span>
+      <button class="copy" type="button" data-copy="email" id="copy-email">Copy</button>
+    </div>
+    <div class="contact-line">
+      <span class="lbl">WhatsApp</span>
+      <span class="val" id="phone">+91 90197 77277</span>
+      <button class="copy" type="button" data-copy="phone" id="copy-phone">Copy</button>
+    </div>
+  </div>
+  <div class="cta-row">
+    <a class="btn btn-fill" href="https://wa.me/919019777277" target="_blank" rel="noopener">WhatsApp ↗</a>
+    <a class="btn btn-ghost" href="./">← Portfolio</a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© <span id="year">2026</span> Feilix Benny</span>
+  <span>BASED IN INDIA · RATES IN INR</span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.dataset.copy);
+      var text = el.textContent.trim();
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); };
+      var fallback = function () {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      };
+      try {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } catch (e) { fallback(); }
+    });
+  });
+</script>
+
+</body>
+</html>
